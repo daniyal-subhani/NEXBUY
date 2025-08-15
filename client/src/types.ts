@@ -1,5 +1,5 @@
 export type ProductType = {
-    id: string;
+    id: string | number;
     name: string;
     shortDescription: string;
     description: string;
@@ -8,3 +8,5 @@ export type ProductType = {
     colors: string[];
     images: Record<string, string>;
 }
+
+export type ProductsType = ProductType[];
