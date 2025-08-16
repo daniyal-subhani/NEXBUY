@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  serverExternalPackages: ["framer-motion", "motion"],
+
+  // OR this, if you want Next.js to transpile it fully:
+  // transpilePackages: ["framer-motion", "motion"],
 };
 
 export default nextConfig;

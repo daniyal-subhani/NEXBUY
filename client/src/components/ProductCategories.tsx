@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+
 const ProductCategories = () => {
   const router = useRouter();
   const searchParams = useSearchParams(); // e.g. "?category=shoes"
