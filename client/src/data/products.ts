@@ -17,6 +17,7 @@ export  const allProducts: ProductsType = [
         purple: "/products/1p.png",
         green: "/products/1gr.png",
       },
+      category: "t-shirts",
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ export  const allProducts: ProductsType = [
       sizes: ["s", "m", "l", "xl"],
       colors: ["gray", "green"],
       images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+      category: "jackets",
     },
     {
       id: 3,
@@ -45,6 +47,7 @@ export  const allProducts: ProductsType = [
         blue: "/products/3b.png",
         black: "/products/3bl.png",
       },
+      category: "hoodies",
     },
     {
       id: 4,
@@ -57,6 +60,7 @@ export  const allProducts: ProductsType = [
       sizes: ["s", "m", "l"],
       colors: ["white", "pink"],
       images: { white: "/products/4w.png", pink: "/products/4p.png" },
+      category: "t-shirts",
     },
     {
       id: 5,
@@ -73,6 +77,7 @@ export  const allProducts: ProductsType = [
         orange: "/products/5o.png",
         black: "/products/5bl.png",
       },
+      category: "jackets",
     },
     {
       id: 6,
@@ -85,6 +90,7 @@ export  const allProducts: ProductsType = [
       sizes: ["40", "42", "43", "44"],
       colors: ["gray", "white"],
       images: { gray: "/products/6g.png", white: "/products/6w.png" },
+      category: "shoes",
     },
     {
       id: 7,
@@ -97,6 +103,7 @@ export  const allProducts: ProductsType = [
       sizes: ["40", "42", "43"],
       colors: ["gray", "pink"],
       images: { gray: "/products/7g.png", pink: "/products/7p.png" },
+      category: "shoes",
     },
     {
       id: 8,
@@ -109,5 +116,6 @@ export  const allProducts: ProductsType = [
       sizes: ["s", "m", "l"],
       colors: ["blue", "green"],
       images: { blue: "/products/8b.png", green: "/products/8gr.png" },
+      category: "jeans",
     },
   ];
