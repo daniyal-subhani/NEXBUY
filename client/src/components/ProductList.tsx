@@ -1,7 +1,7 @@
 // This component will render a list of products
 
 import { ProductsType } from "@/types";
-import {ProductCard} from "@/components"
+import { ProductCard } from "@/components";
 
 const ProductList = () => {
   //  These are Temporary Products
@@ -115,11 +115,13 @@ const ProductList = () => {
       images: { blue: "/products/8b.png", green: "/products/8gr.png" },
     },
   ];
-  return <div>
-    {allProducts.map(product => (
-      <ProductCard key={product.id} product={product} />
-    ))}
-  </div>;
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {allProducts.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
 };
 
 export default ProductList;
