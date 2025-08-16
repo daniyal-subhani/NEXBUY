@@ -7,7 +7,7 @@ import { SearchBar } from "@/components";
 const Navbar = () => {
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 ">
+      <nav className="w-full bg-white border-b border-gray-200 z-50 mb-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           <div className="flex items-center space-x-2">
             <Image

@@ -24,7 +24,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           src={product.images[selectedColor]} // ✅ show image for selected color
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover transition-all hover:scale-105 duration-300 cursor-pointer"
           sizes="(max-width: 768px) 100vw, 300px"
         />
       </div>
@@ -38,51 +38,53 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <p className="text-gray-500 text-sm mt-1 line-clamp-2">
           {product.shortDescription}
         </p>
+        <div className="flex justify-between items-center">
+          {/* Price */}
+          <span className="text-xl font-bold text-gray-900 mt-2">
+            ${product.price.toFixed(2)}
+          </span>
 
-        {/* Price */}
-        <span className="text-xl font-bold text-gray-900 mt-2">
-          ${product.price.toFixed(2)}
-        </span>
-
-        {/* Size Selector */}
-        <div className="mt-3">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Select Size" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Size</SelectLabel>
-                {product.sizes.map((size) => (
-                  <SelectItem key={size} value={size}>
-                    {size.toUpperCase()}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          {/* Size Selector */}
+          <div className="mt-3">
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Size" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Size</SelectLabel>
+                  {product.sizes.map((size) => (
+                    <SelectItem key={size} value={size}>
+                      {size.toUpperCase()}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+        <div className="flex justify-between items-center mt-3">
+          {/* Colors */}
+          <div className="flex items-center gap-2 mt-3">
+            {product.colors.map((color) => (
+              <button
+                key={color}
+                className={`w-6 h-6 rounded-full border-2 transition ${
+                  selectedColor === color
+                    ? "border-gray-800 scale-110"
+                    : "border-gray-300"
+                }`}
+                style={{ backgroundColor: color }}
+                onClick={() => setSelectedColor(color)}
+              />
+            ))}
+          </div>
 
-        {/* Colors */}
-        <div className="flex items-center gap-2 mt-3">
-          {product.colors.map((color) => (
-            <button
-              key={color}
-              className={`w-6 h-6 rounded-full border-2 transition ${
-                selectedColor === color
-                  ? "border-gray-800 scale-110"
-                  : "border-gray-300"
-              }`}
-              style={{ backgroundColor: color }}
-              onClick={() => setSelectedColor(color)}
-            />
-          ))}
+          {/* Action */}
+          <button className="  bg-black  text-white py-1 px-2 rounded-md text-sm cursor-pointer ">
+            Add to Cart
+          </button>
         </div>
-
-        {/* Action */}
-        <button className="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition">
-          Add to Cart
-        </button>
       </div>
     </div>
   );
