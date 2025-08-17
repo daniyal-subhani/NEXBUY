@@ -11,10 +11,24 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useState } from "react";
+import { useCartStore } from "@/stores/cartStore";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
+  const { addItem } = useCartStore();
   // ✅ Default color is the first color in product.colors
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+
+  const handleAddToCart = () => {
+    addItem({
+      ...product,
+      quantity: 1,
+      selectedOptions: {
+        size: selectedSize,
+        color: selectedColor,
+      },
+    });
+  };
 
   return (
     <div className="border rounded-lg shadow-sm hover:shadow-lg transition duration-300 flex flex-col bg-white overflow-hidden">
@@ -54,7 +68,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                 <SelectGroup>
                   <SelectLabel>Size</SelectLabel>
                   {product.sizes.map((size) => (
-                    <SelectItem key={size} value={size}>
+                    <SelectItem onClick={() => setSelectedSize(size)} key={size} value={size}>
                       {size.toUpperCase()}
                     </SelectItem>
                   ))}
@@ -81,7 +95,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           </div>
 
           {/* Action */}
-          <button className="  bg-black  text-white py-1 px-2 rounded-md text-sm cursor-pointer ">
+          <button onClick={handleAddToCart} className="  bg-black  text-white py-1 px-2 rounded-md text-sm cursor-pointer ">
             Add to Cart
           </button>
         </div>
