@@ -5,3 +5,4 @@ export {default as SearchBar} from "./SearchBar";
 export {default as ProductCard} from "./ProductCard";
 export {default as ProductList} from "./ProductList";
 export {default as ProductCategories} from "./ProductCategories";
+export {default as CartProducts} from "./CartProducts";
