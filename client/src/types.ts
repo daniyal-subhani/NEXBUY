@@ -24,6 +24,7 @@ export type CartItemsType = CartItemType[];
 
 export type CartStoreStateTypes = {
   cart: CartItemsType;
+  hasHydrated: boolean;
 };
 export type CartStoreActionTypes = {
   addItem: (product: CartItemType) => void;

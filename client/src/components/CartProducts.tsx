@@ -3,7 +3,7 @@ import { Trash } from "lucide-react";
 import Image from "next/image";
 
 const CartProducts = () => {
-  const { cart , removeItem} = useCartStore();
+  const { cart, removeItem } = useCartStore();
 
   return (
     <div>
@@ -43,7 +43,16 @@ const CartProducts = () => {
             </div>
 
             {/* Remove Button */}
-            <button onClick={() => removeItem(item.id, item.selectedOptions.color, item.selectedOptions.size)} className="p-2 rounded-full hover:bg-red-50 transition">
+            <button
+              onClick={() =>
+                removeItem(
+                  item.id,
+                  item.selectedOptions.color,
+                  item.selectedOptions.size
+                )
+              }
+              className="p-2 rounded-full hover:bg-red-50 transition"
+            >
               <Trash className="h-5 w-5 text-red-600" />
             </button>
           </div>
