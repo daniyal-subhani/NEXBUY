@@ -8,3 +8,5 @@ export const shippingFormSchema = z.object({
     city: z.string().min(1, "City is required!")
 
 })
+
+export type shippingFormInputSchema = z.infer<typeof shippingFormSchema> // This use the schema created by zod and convert it in typescript interfarence, so we don't need to create interfarance manually.
