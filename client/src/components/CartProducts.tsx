@@ -3,26 +3,61 @@ import { Trash } from "lucide-react";
 import Image from "next/image";
 
 const CartProducts = () => {
-    const {cart} = useCartStore();
-  return (
-    <div className="container mx-auto p-4 border-1">
-    {
-        cart.map((item)=> (
-            <div className="">
-                <div>
-                    <Image src={item.images[item.selectedOptions.color]} alt={item.name} width={100} height={100} />
-                </div>
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-gray-600">Price: ${item.price.toFixed(2)}</p>
-                <p className="text-gray-600">Quantity: {item.quantity}</p>
-                <button className="mt-2 text-blue-600 hover:underline">
-                    <Trash className="h-4 w-4" color="red"/>
-                </button>
-            </div>
-        ))
-    }
-    </div>
-  )
-}
+  const { cart , removeItem} = useCartStore();
 
-export default CartProducts
+  return (
+    <div>
+      {/* Cart Items */}
+      <div className="flex-1 space-y-6">
+        {cart.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-center gap-6 p-4 border rounded-2xl shadow-sm hover:shadow-md transition"
+          >
+            {/* Product Image */}
+            <div className="w-28 h-28 flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden">
+              <Image
+                src={item.images[item.selectedOptions.color]}
+                alt={item.name}
+                width={112}
+                height={112}
+                className="object-contain h-full"
+              />
+            </div>
+
+            {/* Product Info */}
+            <div className="flex-1 space-y-2">
+              <h3 className="text-lg font-semibold text-gray-800">
+                {item.name}
+              </h3>
+              <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
+              <p className="text-sm text-gray-600">
+                Size: {item.selectedOptions.size.toUpperCase()}
+              </p>
+              <p className="text-sm text-gray-600">
+                Color: {item.selectedOptions.color}
+              </p>
+              <p className="font-bold text-blue-700">
+                ${item.price.toFixed(2)}
+              </p>
+            </div>
+
+            {/* Remove Button */}
+            <button onClick={() => removeItem(item.id, item.selectedOptions.color, item.selectedOptions.size)} className="p-2 rounded-full hover:bg-red-50 transition">
+              <Trash className="h-5 w-5 text-red-600" />
+            </button>
+          </div>
+        ))}
+
+        {/* Empty Cart Message */}
+        {cart.length === 0 && (
+          <div className="text-center text-gray-500 py-8">
+            Your cart is empty.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CartProducts;

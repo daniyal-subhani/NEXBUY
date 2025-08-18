@@ -35,7 +35,7 @@ const Navbar = () => {
               </Link>
               <div className="relative ">
 
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
+              <Link href="/cart" className="text-gray-700 hover:text-blue-600">
                 <ShoppingCartIcon className="w-4 h-4" />
               </Link>
               <span className="absolute -top-2 -right-2 bg-amber-500 text-black text-xs font-bold px-1 rounded-full">
