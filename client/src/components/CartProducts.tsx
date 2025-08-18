@@ -12,16 +12,15 @@ const CartProducts = () => {
         {cart.map((item) => (
           <div
             key={item.id}
-            className="flex items-center gap-6 p-4 border rounded-2xl shadow-sm hover:shadow-md transition"
+            className="flex items-center gap-6 p-4 leading-tight"
           >
             {/* Product Image */}
-            <div className="w-28 h-28 flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden">
+            <div className="w-28 h-28 flex relative items-center justify-center  overflow-hidden">
               <Image
                 src={item.images[item.selectedOptions.color]}
                 alt={item.name}
-                width={112}
-                height={112}
-                className="object-contain h-full"
+                fill
+                className="object-contain h-full rounded-lg bg-gray-50"
               />
             </div>
 
@@ -37,9 +36,7 @@ const CartProducts = () => {
               <p className="text-sm text-gray-600">
                 Color: {item.selectedOptions.color}
               </p>
-              <p className="font-bold text-blue-700">
-                ${item.price.toFixed(2)}
-              </p>
+              <p className="font-bold text-black">${item.price.toFixed(2)}</p>
             </div>
 
             {/* Remove Button */}
@@ -51,9 +48,9 @@ const CartProducts = () => {
                   item.selectedOptions.size
                 )
               }
-              className="p-2 rounded-full hover:bg-red-50 transition"
+              className="p-2 rounded-full cursor-pointer bg-red-50 transition hover:bg-red-100"
             >
-              <Trash className="h-5 w-5 text-red-600" />
+              <Trash className="h-4 w-4 text-red-600" />
             </button>
           </div>
         ))}
