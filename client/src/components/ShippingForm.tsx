@@ -1,9 +1,27 @@
+import {
+  shippingFormInputSchema,
+  shippingFormSchema,
+} from "@/validation/shippingFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { log } from "console";
 import React from "react";
+import { Resolver, useForm } from "react-hook-form";
 
 export default function ShippingForm() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<shippingFormInputSchema>({
+    resolver: zodResolver(shippingFormSchema),
+  });
+
+  const onSubmit = (data: shippingFormInputSchema) => {
+    console.log(data);
+  };
   return (
     <div className="">
-      <form onSubmit={}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">Name</label>
         <input type="text" placeholder="John Doe" id="name" />
         <label htmlFor="email">Email</label>
