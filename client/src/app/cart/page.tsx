@@ -1,9 +1,15 @@
 "use client";
 
 import { CartProducts } from "@/components";
+import PaymentForm from "@/components/PaymentForm";
+import ShippingForm from "@/components/ShippingForm";
 import { useCartStore } from "@/stores/cartStore";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const page = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const activeStep = parseInt(searchParams.get("step") || "1");
   const { cart } = useCartStore();
   const subTotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -33,8 +39,19 @@ const page = () => {
       {/* You can add other components below */}
       <div className="flex flex-col md:flex-row  gap-8 container mx-auto p-6">
         <div className="lg:w-7/12 border rounded-md">
-          {/* Example component */}
-          <CartProducts />
+          {activeStep === 1 ? (
+
+            <CartProducts />
+          ) : activeStep === 2 ? (
+            <ShippingForm />
+          ) : activeStep === 3 ? (
+            <PaymentForm />
+          ) : (
+            <p className="text-sm text-gray-500">
+            Please fill the shipping form to continue.
+          </p>
+          )
+        }
         </div>
         {/* Payment Details */}
         <div className="w-full md:w-96 border rounded-md p-6 h-max bg-white">
@@ -42,7 +59,8 @@ const page = () => {
 
           <div className="space-y-3 text-gray-700 leading-0.5">
             <p className="flex justify-between">
-              <span className="font-medium">Subtotal:</span> <span className="text-sm">${subTotal.toFixed(2)}</span>
+              <span className="font-medium">Subtotal:</span>{" "}
+              <span className="text-sm">${subTotal.toFixed(2)}</span>
             </p>
             <p className="flex justify-between">
               <span className="font-medium">Tax (2%):</span>{" "}
@@ -53,7 +71,8 @@ const page = () => {
               <span className="text-sm">-${(subTotal * 0.03).toFixed(2)}</span>
             </p>
             <p className="flex justify-between">
-              <span className="font-medium">Shipping Fee:</span> <span className="text-sm">$5.00</span>
+              <span className="font-medium">Shipping Fee:</span>{" "}
+              <span className="text-sm">$5.00</span>
             </p>
           </div>
 
@@ -65,10 +84,14 @@ const page = () => {
               ${(subTotal + subTotal * 0.02 - subTotal * 0.03 + 5).toFixed(2)}
             </span>
           </p>
-
-          <button className="mt-6 w-full bg-black text-white py-2 rounded-md cursor-pointer">
-            Proceed to Checkout
-          </button>
+          {activeStep === 1 && (
+            <button
+              onClick={() => router.push("/cart?step=2", { scroll: false })}
+              className="mt-6 w-full bg-black text-white py-2 rounded-md cursor-pointer"
+            >
+              Continue
+            </button>
+          )}
         </div>
       </div>
     </div>
