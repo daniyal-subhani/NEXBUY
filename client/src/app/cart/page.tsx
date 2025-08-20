@@ -15,7 +15,20 @@ const page = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const steps = ["Shopping Cart", "Shipping Address", "Payment Method"];
+  const steps = [
+    {
+      id: 1,
+      title: "Shopping Cart",
+    },
+    {
+      id: 2,
+      title: "Shipping address",
+    },
+    {
+      id: 3,
+      title: "Payment method",
+    },
+  ];
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-8 text-center">
@@ -23,15 +36,28 @@ const page = () => {
       </h2>
 
       <div className="flex  w-full max-w-md mx-auto space-x-6">
-        {steps.map((step, index) => (
+        {steps.map((step) => (
           <div
-            key={index}
-            className="flex  space-x-2 border-b-2 border-gray-500 py-4"
+            key={step.id}
+            className={`flex  space-x-2 border-b-2  py-4 ${
+              activeStep === step.id ? "border-gray-500" : "border-gray-200"
+            }`}
           >
-            <div className="w-6 h-6 flex  justify-center rounded-full bg-gray-600 text-white">
-              {index + 1}
+            <div
+              className={`w-6 h-6 flex  justify-center rounded-full ${
+                activeStep === step.id ? "bg-gray-500" : "bg-gray-200"
+              } text-white`}
+            >
+              {step.id}
             </div>
-            <p className="text-gray-700 font-medium w-max">{step}</p>
+            <p
+              className={`${
+                activeStep === step.id ? "text-gray-500" : "text-gray-200"
+              } font-medium w-max`}
+            >
+              {step.title}
+            </p>{" "}
+            {/*`${activeStep === index + 1  ? "text-gray-500": "text-gray-200"} font-medium w-max` this also work */}
           </div>
         ))}
       </div>
@@ -40,7 +66,6 @@ const page = () => {
       <div className="flex flex-col md:flex-row  gap-8 container mx-auto p-6">
         <div className="lg:w-7/12 border rounded-md">
           {activeStep === 1 ? (
-
             <CartProducts />
           ) : activeStep === 2 ? (
             <ShippingForm />
@@ -48,10 +73,9 @@ const page = () => {
             <PaymentForm />
           ) : (
             <p className="text-sm text-gray-500">
-            Please fill the shipping form to continue.
-          </p>
-          )
-        }
+              Please fill the shipping form to continue.
+            </p>
+          )}
         </div>
         {/* Payment Details */}
         <div className="w-full md:w-96 border rounded-md p-6 h-max bg-white">
