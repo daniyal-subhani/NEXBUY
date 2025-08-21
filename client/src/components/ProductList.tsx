@@ -4,6 +4,7 @@ import { ProductCard, ProductCategories } from "@/components";
 import { allProducts } from "@/data/products";
 import { useSearchParams } from "next/navigation";
 import {motion, AnimatePresence} from "framer-motion";
+import Link from "next/link";
 
 const ProductList = () => {
   const searchParams = useSearchParams();
@@ -20,15 +21,17 @@ const ProductList = () => {
         {filteredProducts.length > 0 ? (
 
           filteredProducts.map((product) => (
+            <Link href={`/products/${product.id}`} key={product.id}>
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }} // Initial animation state
               animate={{ opacity: 1, y: 0 }} // Final/ending animation state
               exit={{ opacity: 0, y: -20 }} // Exit animation state
               transition={{ duration: 0.3 }} // Animation duration
-            >
+              >
               <ProductCard key={product.id} product={product} />
             </motion.div>
+              </Link>
           ))) : (
             <motion.p
              className="col-span-full text-center text-gray-500"
