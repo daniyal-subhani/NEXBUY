@@ -5,14 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 
 
-interface ProductPageProps {
-  params: {
-    category: string;
-    id: string | number;
-  };
-}
 
-export default function SingleProductPage({ params }: ProductPageProps) {
+
+export default function SingleProductPage({ params, }:{
+  params: { category: string; id: string };
+}) {
   const {addItem} = useCartStore()
   const { id } = params;
   
