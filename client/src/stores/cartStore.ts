@@ -63,10 +63,10 @@ export const useCartStore = create<
         name: "cartStorage", // name of the item in the storage (must be unique)
         // storage: () => sessionStorage, // (optional) by default the 'localStorage' is used
         onRehydrateStorage: () => (state) => {
-          if(state) {
-           state.hasHydrated = true;
+          if (state) {
+            state.hasHydrated = true;
           }
-        }
+        },
       }
     ),
     { name: "CartStore" } // devtools label
