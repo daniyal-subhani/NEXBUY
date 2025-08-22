@@ -12,25 +12,31 @@ import {
 } from "./ui/select";
 import { useState } from "react";
 import { useCartStore } from "@/stores/cartStore";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
+
+ 
+  
   const { addItem, cart } = useCartStore();
   // ✅ Default color is the first color in product.colors
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 
-
   return (
     <div className="border rounded-lg shadow-sm hover:shadow-lg transition duration-300 flex flex-col bg-white overflow-hidden">
       {/* Product Image */}
       <div className="relative w-full aspect-[4/5] bg-gray-50">
+      <Link href={`/products/${product.category}/${product.id}`}>
         <Image
           src={product.images[selectedColor]} // ✅ show image for selected color
           alt={product.name}
           fill
           className="object-cover transition-all hover:scale-105 duration-300 cursor-pointer"
           sizes="(max-width: 768px) 100vw, 300px"
-        />
+          />
+          </Link>
       </div>
 
       {/* Content */}
@@ -50,7 +56,10 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
           {/* Size Selector */}
           <div className="mt-3">
-            <Select value={selectedSize} onValueChange={(value) => setSelectedSize(value)}>
+            <Select
+              value={selectedSize}
+              onValueChange={(value) => setSelectedSize(value)}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select Size" />
               </SelectTrigger>
@@ -85,14 +94,19 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           </div>
 
           {/* Action */}
-          <button onClick={()=> addItem({
-            ...product,
-            quantity: 1,
-            selectedOptions: {
-              size: selectedSize,
-              color: selectedColor,
-            },
-          })} className="  bg-black  text-white py-1 px-2 rounded-md text-sm cursor-pointer ">
+          <button
+            onClick={() =>
+              addItem({
+                ...product,
+                quantity: 1,
+                selectedOptions: {
+                  size: selectedSize,
+                  color: selectedColor,
+                },
+              })
+            }
+            className="  bg-black  text-white py-1 px-2 rounded-md text-sm cursor-pointer "
+          >
             Add to Cart
           </button>
         </div>
