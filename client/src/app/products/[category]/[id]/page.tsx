@@ -1,4 +1,5 @@
 "use client";
+import RelatedProducts from "@/components/RelatedProducts";
 import { allProducts } from "@/data/products";
 import { useCartStore } from "@/stores/cartStore";
 import Image from "next/image";
@@ -121,6 +122,10 @@ export default function SingleProductPage({ params }: PageProps) {
         >
           Add to Cart
         </button>
+      </div>
+      <div className="">
+        <p>related products</p>
+        <RelatedProducts product={product} category={params.category} />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ onChange: (options: {size: string, color: string, quantity: number}) => void
 }
 
 export default function ProductionIntegration({onChange}: ProductOptionsProps) {
-   const [size, setSize] = useState("")
+   const [selectedSize, setSelectedSize] = useState("")
    const [color, setColor] = useState("")
    const [quantity, setQuantity] = useState(1)
   return (
