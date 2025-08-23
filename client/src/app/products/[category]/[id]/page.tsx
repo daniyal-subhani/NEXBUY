@@ -1,26 +1,24 @@
 "use client";
 import RelatedProducts from "@/components/RelatedProducts";
 import { allProducts } from "@/data/products";
-import { useCartStore } from "@/stores/cartStore";
 import Image from "next/image";
-import { useState } from "react";
+import { notFound } from "next/navigation";
+import { useState, use } from "react";
 
-type PageProps = {
-  params: {
+type Props = {
+  params: Promise<{
     category: string;
     id: string;
-  };
+  }>;
+  searchParams?: Record<string, string | string[] | undefined>;
 };
 
-export default function SingleProductPage({ params }: PageProps) {
-  const { addItem } = useCartStore();
-  const { id } = params;
-  
-  const product = allProducts.find((p) => p.id.toString() === id.toString());
+export default function SingleProductPage({ params, searchParams }: Props) {
+  // FIX: Use React's use() hook to resolve the promise
+  const { id, category } = use(params);
 
-  if (!product) {
-    return <p className="text-center text-gray-500">Product not found.</p>;
-  }
+  const product = allProducts.find((p) => p.id.toString() === id.toString());
+  if (!product) return notFound();
 
   // Grab all the images from products
   const allImages = Object.values(product.images);
@@ -28,7 +26,6 @@ export default function SingleProductPage({ params }: PageProps) {
 
   const handleAddToCart = () => {
     console.log("Item Added!");
-    
   };
 
   return (
@@ -54,10 +51,10 @@ export default function SingleProductPage({ params }: PageProps) {
               key={image}
               onClick={() => setMainImage(image)}
             >
-              <Image 
-                src={image} 
-                alt={product.name} 
-                width={70} 
+              <Image
+                src={image}
+                alt={product.name}
+                width={70}
                 height={70}
                 className="rounded-lg"
               />
@@ -116,7 +113,7 @@ export default function SingleProductPage({ params }: PageProps) {
         </div>
 
         {/* Add to Cart */}
-        <button 
+        <button
           onClick={handleAddToCart}
           className="w-full py-3 bg-black text-white rounded-xl hover:bg-gray-800"
         >
@@ -125,7 +122,8 @@ export default function SingleProductPage({ params }: PageProps) {
       </div>
       <div className="">
         <p>related products</p>
-        <RelatedProducts product={product} category={params.category} />
+        {/* FIX: Now using the resolved category variable */}
+        <RelatedProducts product={product} category={category} />
       </div>
     </div>
   );
