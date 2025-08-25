@@ -3,19 +3,12 @@ import RelatedProducts from "@/components/RelatedProducts";
 import { allProducts } from "@/data/products";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { useState, use } from "react";
+import React, { useState } from "react";
 
-type Props = {
-  params: Promise<{
-    category: string;
-    id: string;
-  }>;
-  searchParams?: Record<string, string | string[] | undefined>;
-};
 
-export default function SingleProductPage({ params, searchParams }: Props) {
-  // FIX: Use React's use() hook to resolve the promise
-  const { id, category } = use(params);
+
+export default function SingleProductPage({ params }:{params: Promise<{id:string|number; category: string}>} ) {
+  const { id, category } = React.use(params)
 
   const product = allProducts.find((p) => p.id.toString() === id.toString());
   if (!product) return notFound();

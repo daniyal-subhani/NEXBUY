@@ -1,3 +1,4 @@
+"use client"
 import { useCartStore } from "@/stores/cartStore";
 import { Trash } from "lucide-react";
 import Image from "next/image";

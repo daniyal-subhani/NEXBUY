@@ -6,7 +6,7 @@ import ShippingForm from "@/components/ShippingForm";
 import { useCartStore } from "@/stores/cartStore";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const page = () => {
+const  CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeStep = parseInt(searchParams.get("step") || "1");
@@ -122,4 +122,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CartPage;

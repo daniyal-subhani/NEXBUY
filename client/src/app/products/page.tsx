@@ -1,11 +1,11 @@
-import { ProductList } from "@/components"
+import { ProductList } from "@/components";
 
 const ProductsPage = () => {
   return (
     <div>
       <ProductList />
     </div>
-  )
-}
+  );
+};
 
-export default ProductsPage
+export default ProductsPage;
