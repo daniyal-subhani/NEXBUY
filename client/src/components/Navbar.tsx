@@ -44,7 +44,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <button className="bg-blue-600 text-white px-4 py-2 rounded">
+            <button className="bg-black text-white px-5 py-2 rounded cursor-pointer">
               Login
             </button>
           </div>
